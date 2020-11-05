@@ -21,12 +21,13 @@ class election(EasyFrame):
         self.biden = self.addTextField(text = "", row = 2, column = 1,\
                                        state = "readonly", width = 5)
         self.addLabel(text = "Your votes", row = 4, column = 0)
-        self.addTextField(text = "", row = 4, column = 1, state = "readonly",\
-                          width = 5)
+        self.you = self.addTextField(text = "", row = 4, column = 1,\
+                                     state = "readonly", width = 5)
         self.addLabel(text = "Trump votes", row = 5, column = 0)
-        self.you = self.trump = self.addTextField(text = "", row = 5, \
-                                                  column = 1, \
-                                                  state = "readonly", width = 5)
+        self.trump = self.addTextField(text = "", row = 5, column = 1,\
+                                                state = "readonly", width = 5)
+        self.addLabel(text = "The winner is", row = 6, column = 0)
+        self.winner = self.addTextField(text = "", row = 6, column = 1)
         
 
 
@@ -39,17 +40,25 @@ class election(EasyFrame):
         for vote in range(1000):
             f.write(random.choice(candidates))
             
-        #f.close()
-        names = f.read()
-        print(f.read())
+        f.close()
+        file = open("votes.txt","r")
+        names = file.read()
         votes = names.split()
         
-##        bidenVotes = votes.count("Biden")
-##        youVotes = votes.count("You")
-##        trumpVotes = votes.count("Trump")
-##        self.biden.setText(bidenVotes)
-##        self.you.setText(youVotes)
-##        self.trump.setText(trumpVotes)
+        bidenVotes = votes.count("Biden")
+        youVotes = votes.count("You")
+        trumpVotes = votes.count("Trump")
+        self.biden.setText(bidenVotes)
+        self.you.setText(youVotes)
+        self.trump.setText(trumpVotes)
+
+        if youVotes > bidenVotes and trumpVotes:
+            self.winner.setText("You")
+        elif bidenVotes > youVotes and trumpVotes:
+            self.winner.setText("Biden")
+        else:
+            self.winner.setText("Trump")
+        
         
         
         
