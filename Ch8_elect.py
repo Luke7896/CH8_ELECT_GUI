@@ -52,12 +52,43 @@ class election(EasyFrame):
         self.you.setText(youVotes)
         self.trump.setText(trumpVotes)
 
-        if youVotes > bidenVotes and trumpVotes:
-            self.winner.setText("You")
-        elif bidenVotes > youVotes and trumpVotes:
-            self.winner.setText("Biden")
+        if youVotes > trumpVotes:
+            if youVotes > bidenVotes:
+                self.winner.setText("You")
+            elif youVotes == bidenVotes:
+                self.winner.setText("Tied")
+            else:
+                self.winner.setText("Biden")
+        elif youVotes > bidenVotes:
+            if youVotes > trumpVotes:
+                self.winner.setText("You")
+            elif youVotes == trumpVotes:
+                self.winner.setText("Tied")
+            else:
+                self.winner.setText("Trump")
+        elif bidenVotes > youVotes:
+            if bidenVotes > trumpVotes:
+                self.winner.setText("Biden")
+            elif bidenVotes == trumpVotes:
+                self.winner.setText("Tied")
+            else:
+                self.winner.setText("Trump")
+        elif bidenVotes > trumpVotes:
+            if bidenVotes > youVotes:
+                self.winner.setText("Biden")
+            elif bidenVotes == youVotes:
+                self.winner.setText("Tied")
+            else:
+                self.winner.setText("You")
+        elif trumpVotes > bidenVotes:
+            if trumpVotes > youVotes:
+                self.winner.setText("Trump")
+            elif trumpVotes == youVotes:
+                self.winner.setText("Tied")
+            else:
+                self.winner.setText("You")
         else:
-            self.winner.setText("Trump")
+            self.winner.setText("broken")
         
         
         
